@@ -1,15 +1,17 @@
 /* ===== CivilPak — Blueprint Design System ===== */
 
 :root {
-  --navy: #12293D;
-  --navy-deep: #0B1D2C;
-  --paper: #F2EEE2;
-  --paper-line: #E4DECC;
-  --blue-line: #6FA6C9;
-  --safety-orange: #E2621B;
-  --charcoal: #1E2621;
-  --concrete: #7C8479;
-  --white: #FBFAF6;
+  --navy: #131417;
+  --navy-deep: #0A0B0D;
+  --paper: #1F2124;
+  --paper-line: #34373B;
+  --blue-line: #7FA7BD;
+  --safety-orange: #E3B34E;
+  --charcoal: #ECE7DC;
+  --concrete: #9B948C;
+  --white: #ECE7DC;
+  --ink: #292C30;
+  --paper-light: #F2EDE0;
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -64,9 +66,11 @@ header.site .wrap {
 
 .brand {
   display: flex;
-  align-items: baseline;
+  align-items: center;
   gap: 10px;
 }
+
+.logo-mark { display: block; flex-shrink: 0; }
 
 .brand .mark {
   font-family: 'Archivo Black', sans-serif;
@@ -100,9 +104,10 @@ nav.site a:focus-visible { outline: 2px solid var(--blue-line); outline-offset: 
 
 .hero {
   background:
+    radial-gradient(ellipse 620px 420px at 30% 8%, rgba(227,179,78,0.14), transparent 65%),
     linear-gradient(var(--navy-deep), var(--navy-deep)),
-    repeating-linear-gradient(0deg, transparent, transparent 39px, rgba(111,166,201,0.14) 40px),
-    repeating-linear-gradient(90deg, transparent, transparent 39px, rgba(111,166,201,0.14) 40px);
+    repeating-linear-gradient(0deg, transparent, transparent 39px, rgba(127,167,189,0.12) 40px),
+    repeating-linear-gradient(90deg, transparent, transparent 39px, rgba(127,167,189,0.12) 40px);
   color: var(--white);
   padding: 88px 0 96px;
   position: relative;
@@ -111,9 +116,29 @@ nav.site a:focus-visible { outline: 2px solid var(--blue-line); outline-offset: 
 
 .sheet-frame {
   position: relative;
-  border: 1px solid rgba(111,166,201,0.5);
+  z-index: 1;
+  border: 1px solid rgba(127,167,189,0.4);
   padding: 48px clamp(24px, 5vw, 64px);
+  box-shadow: 0 0 80px -20px rgba(227,179,78,0.18);
 }
+
+.hero-illustration {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+.hero-illustration svg, .hero-illustration img { width: 100%; height: 100%; display: block; object-fit: cover; }
+.hero-illustration::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(100deg, rgba(10,11,13,0.94) 0%, rgba(10,11,13,0.75) 32%, rgba(10,11,13,0.45) 58%, rgba(10,11,13,0.25) 100%),
+    linear-gradient(180deg, rgba(10,11,13,0.15) 0%, rgba(10,11,13,0.55) 100%);
+}
+.hero .wrap { position: relative; z-index: 2; }
 
 .sheet-frame::before,
 .sheet-frame::after,
@@ -167,7 +192,7 @@ nav.site a:focus-visible { outline: 2px solid var(--blue-line); outline-offset: 
   content: '';
   flex: 1;
   height: 1px;
-  background: rgba(111,166,201,0.5);
+  background: rgba(127,167,189,0.4);
 }
 
 .cta-row { display: flex; gap: 16px; flex-wrap: wrap; }
@@ -184,8 +209,8 @@ nav.site a:focus-visible { outline: 2px solid var(--blue-line); outline-offset: 
 }
 .btn:focus-visible { outline: 2px solid var(--blue-line); outline-offset: 3px; }
 
-.btn.primary { background: var(--safety-orange); color: var(--white); }
-.btn.primary:hover { transform: translateY(-2px); }
+.btn.primary { background: var(--safety-orange); color: var(--navy); font-weight: 600; }
+.btn.primary:hover { transform: translateY(-2px); box-shadow: 0 10px 28px -6px rgba(227,179,78,0.45); }
 
 .btn.ghost { border-color: rgba(251,250,246,0.4); color: var(--white); }
 .btn.ghost:hover { border-color: var(--white); }
@@ -193,7 +218,7 @@ nav.site a:focus-visible { outline: 2px solid var(--blue-line); outline-offset: 
 /* ===== Section shell ===== */
 
 .section { padding: 76px 0; }
-.section.alt { background: var(--white); border-top: 1px solid var(--paper-line); border-bottom: 1px solid var(--paper-line); }
+.section.alt { background: var(--ink); border-top: 1px solid var(--paper-line); border-bottom: 1px solid var(--paper-line); }
 
 .section-head {
   display: flex;
@@ -229,11 +254,11 @@ nav.site a:focus-visible { outline: 2px solid var(--blue-line); outline-offset: 
 }
 
 .card {
-  background: var(--white);
+  background: var(--ink);
   border: 1px solid var(--paper-line);
   position: relative;
   padding: 26px 24px 24px;
-  transition: border-color 0.15s ease, transform 0.15s ease;
+  transition: border-color 0.15s ease, transform 0.15s ease, box-shadow 0.2s ease;
 }
 
 .card::before, .card::after {
@@ -247,7 +272,7 @@ nav.site a:focus-visible { outline: 2px solid var(--blue-line); outline-offset: 
 .card::before { top: 8px; left: 8px; border-right: none; border-bottom: none; }
 .card::after { bottom: 8px; right: 8px; border-left: none; border-top: none; }
 
-.card:hover { border-color: var(--safety-orange); transform: translateY(-3px); }
+.card:hover { border-color: var(--safety-orange); transform: translateY(-3px); box-shadow: 0 12px 32px -8px rgba(227,179,78,0.25); }
 
 .card .cat {
   font-family: 'JetBrains Mono', monospace;
@@ -339,10 +364,10 @@ nav.site a:focus-visible { outline: 2px solid var(--blue-line); outline-offset: 
   flex: 1;
   min-width: 220px;
   padding: 13px 16px;
-  background: var(--white);
+  background: var(--paper-light);
   border: 1px solid transparent;
   font-family: 'Inter', sans-serif;
-  color: var(--charcoal);
+  color: var(--navy);
 }
 .subscribe-form input[type="email"]:focus-visible { outline: 2px solid var(--safety-orange); }
 
@@ -378,6 +403,27 @@ footer.site .disclosure {
   color: var(--white);
   padding: 64px 0 48px;
   border-bottom: 3px solid var(--safety-orange);
+  position: relative;
+  overflow: hidden;
+}
+
+.article-head .wrap { position: relative; z-index: 1; }
+
+.head-illustration {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+.head-illustration svg, .head-illustration img { width: 100%; height: 100%; display: block; object-fit: cover; }
+.head-illustration::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(100deg, rgba(10,11,13,0.92) 0%, rgba(10,11,13,0.7) 34%, rgba(10,11,13,0.4) 62%, rgba(10,11,13,0.22) 100%),
+    linear-gradient(180deg, rgba(10,11,13,0.1) 0%, rgba(10,11,13,0.5) 100%);
 }
 
 .article-head .cat {
@@ -430,7 +476,7 @@ footer.site .disclosure {
 
 .callout {
   border-left: 3px solid var(--safety-orange);
-  background: var(--white);
+  background: var(--ink);
   padding: 18px 22px;
   margin: 28px 0;
   font-size: 0.95rem;
