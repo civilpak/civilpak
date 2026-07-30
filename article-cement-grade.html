@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Choosing the Right Cement Grade for Your Site — CivilPak</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --concrete:#ECE8DF; --chalk:#FAF8F3; --graphite:#20242A;
+    --blueprint:#2454A6; --orange:#E35F2B; --steel:#787E86; --line:#20242A26; --radius:2px;
+  }
+  *{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  body{ margin:0; background:var(--concrete); color:var(--graphite); font-family:'IBM Plex Sans', sans-serif; font-size:16px; line-height:1.55; -webkit-font-smoothing:antialiased; }
+  h1,h2,h3{ font-family:'Space Grotesk', sans-serif; margin:0; letter-spacing:-0.01em; }
+  p{ margin:0; }
+  a{ color:inherit; text-decoration:none; }
+  ul{ margin:0; padding:0; list-style:none; }
+
+  .wrap{ max-width:820px; margin:0 auto; padding:0 32px; }
+
+  .eyebrow{ font-family:'IBM Plex Mono', monospace; font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:var(--blueprint); display:flex; align-items:center; gap:10px; }
+  .eyebrow::before{ content:""; width:16px; height:1px; background:var(--blueprint); display:inline-block; }
+
+  .nav{ position:sticky; top:0; z-index:50; background:rgba(250,248,243,.92); backdrop-filter:blur(6px); border-bottom:1px solid var(--line); }
+  .nav-inner{ max-width:1180px; margin:0 auto; padding:16px 32px; display:flex; align-items:center; justify-content:space-between; }
+  .logo{ font-family:'Space Grotesk', sans-serif; font-weight:700; font-size:20px; }
+  .logo .dot{ color:var(--orange); }
+  .nav-links{ display:flex; gap:32px; font-size:14px; font-weight:500; }
+  .nav-links a:hover{ color:var(--blueprint); }
+  .nav-cta{ font-family:'IBM Plex Mono', monospace; font-size:13px; border:1px solid var(--graphite); padding:8px 16px; border-radius:var(--radius); }
+  .nav-cta:hover{ background:var(--graphite); color:var(--chalk); }
+
+  .hero{ position:relative; height:340px; overflow:hidden; color:var(--chalk); display:flex; align-items:flex-end; }
+  .hero-photo{ position:absolute; inset:0; background-image:url('https://images.unsplash.com/photo-1560780552-ba54683cb263?fm=jpg&q=75&w=2000&auto=format&fit=crop'); background-size:cover; background-position:center; }
+  .hero-scrim{ position:absolute; inset:0; background:linear-gradient(180deg, rgba(15,17,20,.35) 0%, rgba(15,17,20,.88) 100%); }
+  .hero-inner{ position:relative; z-index:2; max-width:820px; margin:0 auto; padding:0 32px 36px; width:100%; }
+  .hero .eyebrow{ color:#9CC2F2; margin-bottom:14px; }
+  .hero .eyebrow::before{ background:#9CC2F2; }
+  .hero h1{ font-size:clamp(28px, 4vw, 42px); font-weight:700; line-height:1.1; margin-bottom:12px; }
+  .hero .meta{ font-family:'IBM Plex Mono', monospace; font-size:12.5px; color:#DCE1E7; }
+
+  main{ padding:52px 0 80px; }
+  .back-link{ font-family:'IBM Plex Mono', monospace; font-size:13px; color:var(--blueprint); display:inline-flex; align-items:center; gap:8px; margin-bottom:36px; }
+  .back-link:hover{ text-decoration:underline; }
+
+  .prose h2{ font-size:24px; margin-top:44px; margin-bottom:14px; }
+  .prose h2:first-child{ margin-top:0; }
+  .prose p{ font-size:16.5px; line-height:1.75; color:#2b2f35; margin-bottom:18px; }
+  .prose ul{ margin:0 0 20px 4px; }
+  .prose li{ font-size:16px; line-height:1.7; margin-bottom:10px; padding-left:22px; position:relative; }
+  .prose li::before{ content:"—"; position:absolute; left:0; color:var(--orange); }
+  .callout{ background:var(--chalk); border-left:3px solid var(--orange); padding:20px 24px; margin:28px 0; font-size:15px; line-height:1.6; }
+  .callout .label{ font-family:'IBM Plex Mono', monospace; font-size:11.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--orange); display:block; margin-bottom:8px; }
+
+  .prose table{ width:100%; border-collapse:collapse; margin:26px 0 30px; font-size:14.5px; }
+  .prose th, .prose td{ border:1px solid var(--line); padding:12px 14px; text-align:left; vertical-align:top; }
+  .prose th{ background:var(--chalk); font-family:'IBM Plex Mono', monospace; font-size:11.5px; text-transform:uppercase; letter-spacing:.06em; color:var(--steel); }
+
+  .next-up{ margin-top:64px; padding-top:36px; border-top:1px solid var(--line); }
+  .next-up .eyebrow{ margin-bottom:20px; }
+  .next-grid{ display:grid; grid-template-columns:1fr 1fr; gap:18px; }
+  .next-card{ background:var(--chalk); border:1px solid var(--line); border-radius:var(--radius); padding:20px 22px; }
+  .next-card:hover{ border-color:var(--blueprint); }
+  .next-card .cat{ font-family:'IBM Plex Mono', monospace; font-size:11px; color:var(--orange); text-transform:uppercase; letter-spacing:.08em; }
+  .next-card h3{ font-size:16px; margin-top:8px; line-height:1.35; }
+
+  .footer{ background:var(--graphite); color:#B9BEC6; padding:44px 0; text-align:center; }
+  .footer .logo{ color:var(--chalk); justify-content:center; display:flex; margin-bottom:10px; }
+  .footer p{ font-size:13px; color:#8A8F98; }
+
+  @media (max-width:640px){
+    .nav-links{ display:none; }
+    .next-grid{ grid-template-columns:1fr; }
+    .prose table{ font-size:13px; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="logo">CIVIL<span class="dot">PAK</span></a>
+    <div class="nav-links">
+      <a href="index.html#calculators">Calculators</a>
+      <a href="index.html#articles">Articles</a>
+      <a href="index.html#categories">Categories</a>
+      <a href="index.html#why">About</a>
+    </div>
+    <a href="index.html#calculators" class="nav-cta">Start Calculating</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="hero-photo"></div>
+  <div class="hero-scrim"></div>
+  <div class="hero-inner">
+    <span class="eyebrow">BUILDING MATERIALS</span>
+    <h1>Choosing the Right Cement Grade for Your Site</h1>
+    <span class="meta">5 MIN READ · FIG. 03</span>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <a href="index.html#articles" class="back-link">← Back to Articles</a>
+
+    <div class="prose">
+      <h2>Not all cement is interchangeable</h2>
+      <p>"Cement" on a Pakistani site almost always means one of three types: OPC, PPC, or SRC. They're not upgrades of each other — each is suited to a different job, and using the wrong one can cost you either strength, durability, or money you didn't need to spend.</p>
+
+      <h2>OPC — Ordinary Portland Cement</h2>
+      <p>The default choice for most structural work. OPC comes in grades — commonly 33, 43, and 53 in the subcontinent — where the number refers to the minimum compressive strength (in MPa) at 28 days. Grade 43 is the most common all-rounder for RCC framed structures; Grade 53 is used where higher early strength is needed, such as precast elements or fast-track construction.</p>
+
+      <h2>PPC — Portland Pozzolana Cement</h2>
+      <p>PPC blends OPC clinker with a pozzolanic material, usually fly ash. It gains strength more slowly than OPC but produces less heat during hydration, which matters in mass concrete pours (foundations, dams, thick rafts) where heat build-up can cause cracking. It also tends to be more durable against water and chemical attack over the long term, at a slightly lower cost than OPC.</p>
+
+      <h2>SRC — Sulphate Resisting Cement</h2>
+      <p>Used specifically where soil or groundwater has high sulphate content, which attacks ordinary concrete over time. Common in foundations near saline groundwater, coastal sites, and some industrial environments. It's a specialist choice — don't use it as a general-purpose cement, since it offers no particular advantage where sulphate attack isn't a risk.</p>
+
+      <table>
+        <tr><th>Type</th><th>Early strength</th><th>Best for</th><th>Relative cost</th></tr>
+        <tr><td>OPC (43/53)</td><td>Fast</td><td>General RCC, columns, beams, slabs</td><td>Baseline</td></tr>
+        <tr><td>PPC</td><td>Slower</td><td>Mass concrete, foundations, durability-focused work</td><td>Slightly lower</td></tr>
+        <tr><td>SRC</td><td>Moderate</td><td>Sulphate-rich soil or groundwater, coastal foundations</td><td>Higher</td></tr>
+      </table>
+
+      <div class="callout">
+        <span class="label">Site tip</span>
+        If you're unsure whether a site has a sulphate risk, a soil test is far cheaper than discovering the problem 10 years into a building's life. Don't default to SRC "just in case" without data — it adds cost without benefit if the risk isn't real.
+      </div>
+
+      <h2>How to decide</h2>
+      <ul>
+        <li>Standard columns, beams, and slabs on a normal site → OPC 43, or OPC 53 if you need faster formwork turnaround.</li>
+        <li>Large foundation pours, rafts, or mass concrete → PPC, to control heat of hydration and reduce cracking risk.</li>
+        <li>Foundations in sulphate-affected soil or near seawater → SRC, confirmed by a soil/water test.</li>
+      </ul>
+
+      <p>The right grade isn't about which cement is "strongest" on the bag — it's about matching the cement's behaviour to what the specific pour actually needs.</p>
+    </div>
+
+    <div class="next-up">
+      <span class="eyebrow">KEEP READING</span>
+      <div class="next-grid">
+        <a class="next-card" href="article-boq-guide.html">
+          <span class="cat">Quantity Surveying</span>
+          <h3>Understanding BOQ: A Site Engineer's Guide</h3>
+        </a>
+        <a class="next-card" href="article-estimation-techniques.html">
+          <span class="cat">Estimation</span>
+          <h3>Estimation Techniques Every QS Should Know</h3>
+        </a>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="logo">CIVIL<span class="dot" style="color:var(--orange);">PAK</span></div>
+  <p>© 2026 CivilPak. Built for civil engineers everywhere.</p>
+</footer>
+
+</body>
+</html>

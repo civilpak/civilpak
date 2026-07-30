@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Estimation Techniques Every QS Should Know — CivilPak</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --concrete:#ECE8DF; --chalk:#FAF8F3; --graphite:#20242A;
+    --blueprint:#2454A6; --orange:#E35F2B; --steel:#787E86; --line:#20242A26; --radius:2px;
+  }
+  *{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  body{ margin:0; background:var(--concrete); color:var(--graphite); font-family:'IBM Plex Sans', sans-serif; font-size:16px; line-height:1.55; -webkit-font-smoothing:antialiased; }
+  h1,h2,h3{ font-family:'Space Grotesk', sans-serif; margin:0; letter-spacing:-0.01em; }
+  p{ margin:0; }
+  a{ color:inherit; text-decoration:none; }
+  ul{ margin:0; padding:0; list-style:none; }
+
+  .wrap{ max-width:820px; margin:0 auto; padding:0 32px; }
+
+  .eyebrow{ font-family:'IBM Plex Mono', monospace; font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:var(--blueprint); display:flex; align-items:center; gap:10px; }
+  .eyebrow::before{ content:""; width:16px; height:1px; background:var(--blueprint); display:inline-block; }
+
+  .nav{ position:sticky; top:0; z-index:50; background:rgba(250,248,243,.92); backdrop-filter:blur(6px); border-bottom:1px solid var(--line); }
+  .nav-inner{ max-width:1180px; margin:0 auto; padding:16px 32px; display:flex; align-items:center; justify-content:space-between; }
+  .logo{ font-family:'Space Grotesk', sans-serif; font-weight:700; font-size:20px; }
+  .logo .dot{ color:var(--orange); }
+  .nav-links{ display:flex; gap:32px; font-size:14px; font-weight:500; }
+  .nav-links a:hover{ color:var(--blueprint); }
+  .nav-cta{ font-family:'IBM Plex Mono', monospace; font-size:13px; border:1px solid var(--graphite); padding:8px 16px; border-radius:var(--radius); }
+  .nav-cta:hover{ background:var(--graphite); color:var(--chalk); }
+
+  .hero{ position:relative; height:340px; overflow:hidden; color:var(--chalk); display:flex; align-items:flex-end; }
+  .hero-photo{ position:absolute; inset:0; background-image:url('https://images.unsplash.com/photo-1503387837-b154d5074bd2?fm=jpg&q=75&w=2000&auto=format&fit=crop'); background-size:cover; background-position:center; }
+  .hero-scrim{ position:absolute; inset:0; background:linear-gradient(180deg, rgba(15,17,20,.35) 0%, rgba(15,17,20,.88) 100%); }
+  .hero-inner{ position:relative; z-index:2; max-width:820px; margin:0 auto; padding:0 32px 36px; width:100%; }
+  .hero .eyebrow{ color:#9CC2F2; margin-bottom:14px; }
+  .hero .eyebrow::before{ background:#9CC2F2; }
+  .hero h1{ font-size:clamp(28px, 4vw, 42px); font-weight:700; line-height:1.1; margin-bottom:12px; }
+  .hero .meta{ font-family:'IBM Plex Mono', monospace; font-size:12.5px; color:#DCE1E7; }
+
+  main{ padding:52px 0 80px; }
+  .back-link{ font-family:'IBM Plex Mono', monospace; font-size:13px; color:var(--blueprint); display:inline-flex; align-items:center; gap:8px; margin-bottom:36px; }
+  .back-link:hover{ text-decoration:underline; }
+
+  .prose h2{ font-size:24px; margin-top:44px; margin-bottom:14px; }
+  .prose h2:first-child{ margin-top:0; }
+  .prose p{ font-size:16.5px; line-height:1.75; color:#2b2f35; margin-bottom:18px; }
+  .prose ul{ margin:0 0 20px 4px; }
+  .prose li{ font-size:16px; line-height:1.7; margin-bottom:10px; padding-left:22px; position:relative; }
+  .prose li::before{ content:"—"; position:absolute; left:0; color:var(--orange); }
+  .callout{ background:var(--chalk); border-left:3px solid var(--orange); padding:20px 24px; margin:28px 0; font-size:15px; line-height:1.6; }
+  .callout .label{ font-family:'IBM Plex Mono', monospace; font-size:11.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--orange); display:block; margin-bottom:8px; }
+
+  .prose table{ width:100%; border-collapse:collapse; margin:26px 0 30px; font-size:14.5px; }
+  .prose th, .prose td{ border:1px solid var(--line); padding:12px 14px; text-align:left; vertical-align:top; }
+  .prose th{ background:var(--chalk); font-family:'IBM Plex Mono', monospace; font-size:11.5px; text-transform:uppercase; letter-spacing:.06em; color:var(--steel); }
+
+  .next-up{ margin-top:64px; padding-top:36px; border-top:1px solid var(--line); }
+  .next-up .eyebrow{ margin-bottom:20px; }
+  .next-grid{ display:grid; grid-template-columns:1fr 1fr; gap:18px; }
+  .next-card{ background:var(--chalk); border:1px solid var(--line); border-radius:var(--radius); padding:20px 22px; }
+  .next-card:hover{ border-color:var(--blueprint); }
+  .next-card .cat{ font-family:'IBM Plex Mono', monospace; font-size:11px; color:var(--orange); text-transform:uppercase; letter-spacing:.08em; }
+  .next-card h3{ font-size:16px; margin-top:8px; line-height:1.35; }
+
+  .footer{ background:var(--graphite); color:#B9BEC6; padding:44px 0; text-align:center; }
+  .footer .logo{ color:var(--chalk); justify-content:center; display:flex; margin-bottom:10px; }
+  .footer p{ font-size:13px; color:#8A8F98; }
+
+  @media (max-width:640px){
+    .nav-links{ display:none; }
+    .next-grid{ grid-template-columns:1fr; }
+    .prose table{ font-size:13px; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="logo">CIVIL<span class="dot">PAK</span></a>
+    <div class="nav-links">
+      <a href="index.html#calculators">Calculators</a>
+      <a href="index.html#articles">Articles</a>
+      <a href="index.html#categories">Categories</a>
+      <a href="index.html#why">About</a>
+    </div>
+    <a href="index.html#calculators" class="nav-cta">Start Calculating</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="hero-photo"></div>
+  <div class="hero-scrim"></div>
+  <div class="hero-inner">
+    <span class="eyebrow">ESTIMATION</span>
+    <h1>Estimation Techniques Every QS Should Know</h1>
+    <span class="meta">7 MIN READ · FIG. 02</span>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <a href="index.html#articles" class="back-link">← Back to Articles</a>
+
+    <div class="prose">
+      <h2>Why the technique you choose matters</h2>
+      <p>Estimation isn't one skill — it's several, used at different points in a project's life. Pricing a concept sketch at feasibility stage needs speed, not precision. Pricing a tender needs precision, not speed. Using the wrong technique for the stage you're at is one of the most common (and costly) mistakes a QS can make.</p>
+
+      <h2>The three levels of estimation</h2>
+      <p>Most estimating work falls into one of three levels, moving from rough to exact as the design matures:</p>
+
+      <table>
+        <tr><th>Method</th><th>When it's used</th><th>How it works</th></tr>
+        <tr><td>Approximate / conceptual</td><td>Feasibility, early budgeting</td><td>Cost per m² of floor area, or per functional unit (per bed, per parking space), based on historical data from similar projects.</td></tr>
+        <tr><td>Unit rate estimating</td><td>Tender stage, once a BOQ exists</td><td>Each measured item priced using a rate — either from a cost database or a first-principles build-up.</td></tr>
+        <tr><td>Detailed / analytical</td><td>Tender pricing, cost planning</td><td>Every rate broken into labour, material, plant, overheads, and profit — built up from scratch rather than looked up.</td></tr>
+      </table>
+
+      <h2>Approximate estimating: fast, not precise</h2>
+      <p>At feasibility stage, the drawings barely exist — sometimes it's just a floor area and a building type. The functional unit method (cost per bed for a hospital, cost per parking bay for a car park) or the superficial floor area method (cost per m²) let you produce a workable budget number in hours rather than weeks. The trade-off is accuracy: expect a margin of error of 15–25% at this stage, and say so explicitly when you present the number.</p>
+
+      <h2>Unit rate estimating: the tender workhorse</h2>
+      <p>Once a BOQ exists, each line item gets a rate — for concrete per m³, brickwork per m², steel per tonne. These rates usually come from a maintained cost database, adjusted for the specific project's location, access, and market conditions at time of tender. This is the method most QS work centres on day to day.</p>
+
+      <h2>Detailed estimating: building a rate from nothing</h2>
+      <p>When there's no comparable historical rate — an unusual specification, an imported material, a non-standard method — the rate has to be built up analytically:</p>
+      <ul>
+        <li><strong>Labour</strong> — output rate (units per gang per day) × labour cost per day.</li>
+        <li><strong>Material</strong> — quantity required including wastage, at current delivered price.</li>
+        <li><strong>Plant</strong> — hire or ownership cost apportioned to the item.</li>
+        <li><strong>Overheads and profit</strong> — added as a percentage on top of the direct cost.</li>
+      </ul>
+
+      <div class="callout">
+        <span class="label">Site tip</span>
+        Keep your rate database alive, not archived. A rate from a project 3 years ago is a starting point, not an answer — always adjust for current material prices and the specific site's access and conditions before reusing it.
+      </div>
+
+      <h2>What separates an accurate estimate from a rough guess</h2>
+      <ul>
+        <li>A site visit before pricing, not just a desk-based takeoff from drawings.</li>
+        <li>An explicit contingency percentage, sized to how much design information is actually available.</li>
+        <li>Rates adjusted for inflation and current market prices, not pulled unchanged from an old job.</li>
+        <li>An elemental cost breakdown the client can actually read — not just a single lump-sum number.</li>
+      </ul>
+
+      <p>The goal isn't to eliminate uncertainty — early in a project, that's impossible. The goal is to be precise about how uncertain your number actually is, and to use the right technique for the stage you're estimating at.</p>
+    </div>
+
+    <div class="next-up">
+      <span class="eyebrow">KEEP READING</span>
+      <div class="next-grid">
+        <a class="next-card" href="article-boq-guide.html">
+          <span class="cat">Quantity Surveying</span>
+          <h3>Understanding BOQ: A Site Engineer's Guide</h3>
+        </a>
+        <a class="next-card" href="article-cement-grade.html">
+          <span class="cat">Building Materials</span>
+          <h3>Choosing the Right Cement Grade for Your Site</h3>
+        </a>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="logo">CIVIL<span class="dot" style="color:var(--orange);">PAK</span></div>
+  <p>© 2026 CivilPak. Built for civil engineers everywhere.</p>
+</footer>
+
+</body>
+</html>
